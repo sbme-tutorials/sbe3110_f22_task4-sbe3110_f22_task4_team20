@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Comaptible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <title>Image Mixer</title>  
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+        <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script> 
+        <script src="https://unpkg.com/konva@6.0.0/konva.min.js"></script>
+    </head>
+    <body>
+    <div class="top">
+        <!-- <button class="circle" id="Button">Circle1</button> -->
+        <button class="circle" id="Rect">Rectangle1</button>
+
+        <!-- <button class="circle" id="Button2">Circle2</button> -->
+        <button class="circle" id="Rect2">Rectangle2</button>
+        <!-- <form action="http://localhost:7900/mag_phase" method="post"></form> -->
+        <!-- <form action="/upload/1" id="magnitude1" method="post"> -->
+            <button id="mag1_button" onclick="magfun1()">Magnitude1 & Phase2</button>
+        <!-- </form> -->
+        <!-- <form action="/upload/1" id="phase1" method="post"> -->
+            <!-- <button id="phase1_button" onclick="phasefun1()">Phase1</button> -->
+        <!-- </form> -->
+        <!-- <form action="/upload/2" id="magnitude2" method="post"> -->
+            <button id="mag2_button" onclick="magfun2()">Magnitude2 & Phase1</button>
+        <!-- </form> -->
+        <!-- <form action="/upload/2" id="phase2" method="post"> -->
+            <!-- <button id="phase2_button" onclick="phasefun2()" >Phase2</button> -->
+        <!-- </form> -->
+    
+    </div> 
+    
+    <div class="container">
+        <div class="block">
+            
+            <form id="upload-image" method="post" enctype="multipart/form-data">
+                <input name="file" type="file" id="image_input" accept="image/png, image/jpg">
+            </form>
+            <div id="display_image" class="display">
+
+            </div>  
+            <!-- <div id="display_image" class="display" style="width: 50%"></div>   -->
+            <form id="upload-image2" method="post" enctype="multipart/form-data">
+                <input  name="file" type="file" id="image_input2" accept="image/png, image/jpg" >
+            </form>           
+            <!-- <div id="display_image2" class="display" style="width: inherit"></div> -->
+            <div id="display_image2" class="display" ></div>
+        <div class="show">
+
+            <div class="image_mag_ph1"  >
+                <img id="signal" style="width: 270px; height:230px;">
+                <div id="shape_container1"></div>
+            </div>
+            <div class="image_mag_ph2" >
+                <img id="signal2" style="width: 270px; height:230px;" >
+                <div id="shape_container2"></div>
+            </div>
+            
+        
+            </div>
+        </div>
+
+        <div class="block">
+
+     
+            <h2 >Image mixed</h2>
+
+            <div id="display_image" class="display_out" style="width: 270px; height:230px;">
+                <img id="image_output"  style="width: 270px; height:230px;">
+            </div>  
+
+            
+        </div>
+    </div>
+
+    <div id="menu">
+        <div>
+            <button id="delete-button">Delete</button>
+        </div>
+    </div>
+
+        <script src="static/js/script.js"></script>
+        
+
+
+    </body>
+</html>
