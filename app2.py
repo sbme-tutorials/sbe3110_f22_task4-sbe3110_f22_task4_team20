@@ -44,7 +44,7 @@ def upload_file(image_id):
             file.save(filepath2)
             mag2,pha2=functions.image.get_components(filepath2,2)
             select=1
-
+            functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
     elif image_id==3:
         select=2
         functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
@@ -74,5 +74,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug = True,port=9038)
+    app.run(debug = True,port=9040)
 

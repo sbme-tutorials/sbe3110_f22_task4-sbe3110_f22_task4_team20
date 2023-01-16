@@ -316,7 +316,7 @@ function mouseupHandler(y)
     if (choiceMag1=="0"){
       $.ajax({
         type: "POST",
-        url: 'http://127.0.0.1:9038/upload/4',
+        url: 'http://127.0.0.1:9040/upload/4',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         data: JSON.stringify({
@@ -340,7 +340,7 @@ function mouseupHandler(y)
       {
         $.ajax({
           type: "POST",
-          url: 'http://127.0.0.1:9038/upload/5',
+          url: 'http://127.0.0.1:9040/upload/5',
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
           data: JSON.stringify({

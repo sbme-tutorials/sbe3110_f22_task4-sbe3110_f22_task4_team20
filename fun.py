@@ -55,12 +55,36 @@ class image:
 
 class Processing:
 
-    def mask(img,x,y,w,h):
-        mask0=img
-        mask1=np.zeros(mask0.shape,np.uint8)
-        mask1[int(y):int(y)+int(h),int(x):int(x)+int(w)]=mask0[int(y):int(y)+int(h),int(x):int(x)+int(w)]
-        return mask1
+    #def mask(img,x,y,w,h):
+    #    mask0=img
+    #    mask1=np.zeros(mask0.shape,np.uint8)
+    #    mask1[int(y):int(y)+int(h),int(x):int(x)+int(w)]=mask0[int(y):int(y)+int(h),int(x):int(x)+int(w)]
+    #    return mask1
+        
+   
+  
+            
+    def rectangle(img, x1, y1, w, h, filter_flag):
+        i=0
+        j=0
+        x2=x1+w
+        y2=y1+h
+        zero_2d_low = np.zeros_like(img)
+        zero_2d_high= np.zeros_like(img)
+        max_height = img.shape[0] - 1
+        
+        for i in range(int(x1), int(x2)):
+            for j in range(int(y1), int(y2)):
+                zero_2d_low[max_height - j, i] = img[max_height - j, i]
+                img[max_height - j, i] = zero_2d_high[max_height - j, i]
+        if filter_flag==0:
+            return zero_2d_low
+        else:
+            return img
     
+
+
+        
 
     def requested_data(img1,img2):
         data=request.get_json()
@@ -75,9 +99,9 @@ class Processing:
         w2=data["w2"]
         h2=data["h2"]
 
-        masking1=Processing.mask(img1,x1,y1,w1,h1)
+        masking1=Processing.rectangle(img1,x1,y1,w1,h1,filter_flag=1)
 
-        masking2=Processing.mask(img2,x2,y2,w2,h2)
+        masking2=Processing.rectangle(img2,x2,y2,w2,h2,filter_flag=1)
         print(data)
 
         return masking1,masking2
