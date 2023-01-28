@@ -6,6 +6,41 @@ let m = 0;
 let choiceMag1;
 
 
+
+function ischecked(){
+  if (document.getElementById("filter_flag").checked){
+    document.getElementById("mess").textContent="High Pass";
+    $.ajax({
+      type: "POST",
+      url: "/upload/10",
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: true,
+      success: function (data) {
+        document.getElementById("image_output").innerHTML= image_output();
+  
+      }})
+  }
+
+  else {
+    document.getElementById("mess").textContent="Low Pass";
+    $.ajax({
+      type: "POST",
+      url: "/upload/11",
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: true,
+      success: function (data) {
+        document.getElementById("image_output").innerHTML= image_output();
+  
+      }})
+  }
+}
+
+
+
 function magfun1(){
   choiceMag1="0";
   images1();
@@ -316,7 +351,7 @@ function mouseupHandler(y)
     if (choiceMag1=="0"){
       $.ajax({
         type: "POST",
-        url: 'http://127.0.0.1:9040/upload/4',
+        url: 'http://127.0.0.1:5002/upload/4',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         data: JSON.stringify({
@@ -340,7 +375,7 @@ function mouseupHandler(y)
       {
         $.ajax({
           type: "POST",
-          url: 'http://127.0.0.1:9040/upload/5',
+          url: 'http://127.0.0.1:5002/upload/5',
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
           data: JSON.stringify({
@@ -351,7 +386,7 @@ function mouseupHandler(y)
                   'x2':m.x(),
                   'y2':m.y(),
                   'w2':m.width(),
-                  'h2':m.height(),
+                  'h2':m.height()
                 }),
           
           success: function (data) {

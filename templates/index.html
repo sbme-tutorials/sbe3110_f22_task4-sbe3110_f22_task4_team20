@@ -13,11 +13,8 @@
     </head>
     <body>
     <div class="top">
-        <!-- <button class="circle" id="Button">Circle1</button> -->
-        <button class="circle" id="Rect">Rectangle1</button>
-
-        <!-- <button class="circle" id="Button2">Circle2</button> -->
-        <button class="circle" id="Rect2">Rectangle2</button>
+        
+       
         <!-- <form action="http://localhost:7900/mag_phase" method="post"></form> -->
         <!-- <form action="/upload/1" id="magnitude1" method="post"> -->
             <button id="mag1_button" onclick="magfun1()">Magnitude1 & Phase2</button>
@@ -31,7 +28,9 @@
         <!-- <form action="/upload/2" id="phase2" method="post"> -->
             <!-- <button id="phase2_button" onclick="phasefun2()" >Phase2</button> -->
         <!-- </form> -->
-    
+        <input type="checkbox"   id="filter_flag" onclick="ischecked()">
+        <p class="mess" id="mess">low pass</p>
+        
     </div> 
     
     <div class="container">
@@ -63,6 +62,12 @@
         
             </div>
         </div>
+        <div class="btn-group">
+            <button class="circle" id="Rect"></button>
+
+            <button class="circle" id="Rect2"></button>
+
+        </div>
 
         <div class="block">
 
@@ -84,7 +89,7 @@
     </div>
 
         <script src="static/js/script.js"></script>
-        
+        <script src="https://kit.fontawesome.com/b705027cc2.js" crossorigin="anonymous"></script>
 
 
     </body>

@@ -27,7 +27,7 @@ def allowed_file(filename):
 
 @app.route('/upload/<int:image_id>',methods=['POST'])
 def upload_file(image_id):
-    global filepath1,filepath2,mag1,pha1,mag2,pha2
+    global filepath1,filepath2,mag1,pha1,mag2,pha2,filter_id
     if image_id==1:
         if 'file' in request.files:
             file = request.files['file']
@@ -44,7 +44,16 @@ def upload_file(image_id):
             file.save(filepath2)
             mag2,pha2=functions.image.get_components(filepath2,2)
             select=1
+            filter_id=0
             functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
+    elif image_id==10:
+        filter_id=1
+
+
+    elif image_id==11:
+        filter_id=0
+
+
     elif image_id==3:
         select=2
         functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
@@ -54,12 +63,12 @@ def upload_file(image_id):
         functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
 
     elif image_id==4:
-        mag11,pha22=functions.Processing.requested_data(mag1,pha2)
+        mag11,pha22=functions.Processing.requested_data(mag1,pha2,filter_id)
         select=1
         functions.Processing.mixer(mag11,pha1,mag2,pha22,select)
 
     elif image_id==5:
-        mag22,pha11=functions.Processing.requested_data(mag2,pha1)
+        mag22,pha11=functions.Processing.requested_data(mag2,pha1,filter_id)
         select=2
         functions.Processing.mixer(mag1,pha11,mag22,pha2,select)
     
@@ -74,5 +83,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug = True,port=9040)
+    app.run(debug = True,port=5002)
 
