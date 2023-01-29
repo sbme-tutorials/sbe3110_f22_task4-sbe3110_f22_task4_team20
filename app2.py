@@ -45,7 +45,8 @@ def upload_file(image_id):
             mag2,pha2=functions.image.get_components(filepath2,2)
             select=1
             filter_id=0
-            functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
+            functions.Processing.mixer(mag1,pha2)
+            
     elif image_id==10:
         filter_id=1
 
@@ -55,22 +56,18 @@ def upload_file(image_id):
 
 
     elif image_id==3:
-        select=2
-        functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
+        functions.Processing.mixer(mag2,pha1)
 
     elif image_id==6:
-        select=1
-        functions.Processing.mixer(mag1,pha1,mag2,pha2,select)
+        functions.Processing.mixer(mag1,pha2)
 
     elif image_id==4:
-        mag11,pha22=functions.Processing.requested_data(mag1,pha2,filter_id)
-        select=1
-        functions.Processing.mixer(mag11,pha1,mag2,pha22,select)
+        cropped_magnitude1,copped_phase2=functions.Processing.requested_data(mag1,pha2,filter_id)
+        functions.Processing.mixer(cropped_magnitude1,copped_phase2)
 
     elif image_id==5:
-        mag22,pha11=functions.Processing.requested_data(mag2,pha1,filter_id)
-        select=2
-        functions.Processing.mixer(mag1,pha11,mag22,pha2,select)
+        cropped_magnitude2,copped_phase1=functions.Processing.requested_data(mag2,pha1,filter_id)
+        functions.Processing.mixer(cropped_magnitude2,copped_phase1)
     
 
 
@@ -83,5 +80,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug = True,port=5002)
+    app.run(debug = True,port=5007)
 

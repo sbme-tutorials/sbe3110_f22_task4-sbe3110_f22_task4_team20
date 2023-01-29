@@ -9,7 +9,7 @@ let choiceMag1;
 
 function ischecked(){
   if (document.getElementById("filter_flag").checked){
-    document.getElementById("mess").textContent="High Pass";
+    document.getElementById("mess").textContent="Outer Cropping";
     $.ajax({
       type: "POST",
       url: "/upload/10",
@@ -24,7 +24,7 @@ function ischecked(){
   }
 
   else {
-    document.getElementById("mess").textContent="Low Pass";
+    document.getElementById("mess").textContent="Inner Cropping";
     $.ajax({
       type: "POST",
       url: "/upload/11",
@@ -39,6 +39,23 @@ function ischecked(){
   }
 }
 
+const toggleTo2 = document.getElementById("mag2_button");
+const toggleTo1 = document.getElementById("mag1_button");
+
+const hide = el => el.style.setProperty("display", "none");
+const show = el => el.style.setProperty("display", "inline-block");
+
+hide(toggleTo1);
+
+toggleTo2.addEventListener("click", () => {
+  hide(toggleTo2);
+  show(toggleTo1);
+});
+
+toggleTo1.addEventListener("click", () => {
+  hide(toggleTo1);
+  show(toggleTo2);
+});
 
 
 function magfun1(){
@@ -351,7 +368,7 @@ function mouseupHandler(y)
     if (choiceMag1=="0"){
       $.ajax({
         type: "POST",
-        url: 'http://127.0.0.1:5002/upload/4',
+        url: 'http://127.0.0.1:5007/upload/4',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         data: JSON.stringify({
@@ -375,7 +392,7 @@ function mouseupHandler(y)
       {
         $.ajax({
           type: "POST",
-          url: 'http://127.0.0.1:5002/upload/5',
+          url: 'http://127.0.0.1:5007/upload/5',
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
           data: JSON.stringify({

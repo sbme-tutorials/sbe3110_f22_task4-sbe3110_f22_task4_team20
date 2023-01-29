@@ -14,10 +14,7 @@ class image:
         return img1
     
     def resize(img1):
-        img1=cv2.resize(img1,(270,230
-        
-        
-        ))
+        img1=cv2.resize(img1,(270,230))
         return img1
     
     def fourier(img1):
@@ -59,16 +56,16 @@ class Processing:
         image0=img
         x2=x1+w
         y2=y1+h
+        x1_axis=int(x1)
+        x2_axis=int(x2)
         zero_2d_low = np.zeros_like(image0)
         zero_2d_high= np.zeros_like(image0)
         max_height = image0.shape[0] - 1
-        for x in range(int(x1), int(x2)):
+        for x in range(x1_axis, x2_axis):
             for y in range(int(y1), int(y2)):
                 zero_2d_low[max_height - y, x] = image0[max_height - y, x]
                 image0[max_height - y, x] = zero_2d_high[max_height - y, x]
-
         if filter_flag==0:
-            #zero_2d_low1 = np.zeros_like(image0)
             return zero_2d_low
         else:
             return image0
@@ -95,17 +92,11 @@ class Processing:
         return masking1,masking2
 
 
-    def mixer(magnitude,phase,magnitude2,phase2,select):
-        if select ==1:
-            print("mag of first and phase of second")
-            img_comb = np.multiply(magnitude, np.exp(1j * phase2))
-            resulting_img= np.real(np.fft.ifft2(np.fft.ifftshift(img_comb)))
-        if select==2:
-            print("mag of second and phase of first")
-            img_comb = np.multiply(magnitude2, np.exp(1j * phase))
-            resulting_img= np.real(np.fft.ifft2(img_comb))
 
-        # resulting_img=np.abs(resulting_img)
+    def mixer (magnitude,phase):
+
+        img_comb = np.multiply(magnitude, np.exp(1j * phase))
+        resulting_img= np.real(np.fft.ifft2(img_comb))
     
         saved_path='./static/images/combined.jpg'
         plt.imsave(saved_path,np.abs(resulting_img), cmap='gray')    
@@ -113,34 +104,3 @@ class Processing:
 
 
     
-    # def main(path1,index):
-    #     img1_path  =0
-    #     img2_path =0
-
-    #     if index ==1:
-    #         img1_path==path1
-    #     else:
-    #         img2_path=path1 
-
-    #     default_path='./static/images/Pulse-Sensor-Pinout.png'
-    #     img_default=image.read(default_path)
-    #     img_default=image.resize(img_default)
-    #     mag_default=image.get_magnitude(img_default)
-    #     phase_defualt=image.get_phase(img_default)
-        
-    #     if index==1:
-    #         mag1,phase1=image.get_components(img1_path,1)
-    #         # mag1=Processing.check(mag1,x,y,h,w)
-    #         # phase1=Processing.check(phase1,x,y,h,w)
-    #     else:
-    #         mag2,phase2=image.get_components(img2_path,2)
-    #         # mag2=Processing.check(mag1,x,y,h,w)
-    #         # phase2=Processing.check(phase2,x,y,h,w)
-    
-    #     if (img1_path == None and img2_path != None):
-    #         Image.mixer(mag_default,phase_defualt,mag2,phase2,select)
-        
-    #     elif (img1_path !=None and img2_path ==None):
-    #         Image.mixer(mag1,phase1,mag_default,phase_defualt,select)
-    #     else  :
-    #         Image.mixer(mag1,phase1,mag2,phase2,select)
